@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:dev_ops/components/custom_surfix_icon.dart';
 import 'package:dev_ops/components/default_button.dart';
@@ -19,6 +20,18 @@ class _SignUpFormState extends State<SignUpForm> {
   String? conform_password;
   bool remember = false;
   final List<String?> errors = [];
+  FirebaseAuth auth = FirebaseAuth.instance;
+
+  void signup(
+      BuildContext context, String email, String conform_password) async {
+    try {
+      await auth.createUserWithEmailAndPassword(
+          email: email, password: conform_password);
+      Navigator.pushNamed(context, CompleteProfileScreen.routeName);
+    } catch (e) {
+      print(e);
+    }
+  }
 
   void addError({String? error}) {
     if (!errors.contains(error))
@@ -49,11 +62,18 @@ class _SignUpFormState extends State<SignUpForm> {
           SizedBox(height: getProportionateScreenHeight(40)),
           DefaultButton(
             text: "Continue",
-            press: () {
+            press: () async {
+              // FirebaseAuth.instance.createUserWithEmailAndPassword(
+              //     email: email, password: password);
               if (_formKey.currentState!.validate()) {
                 _formKey.currentState!.save();
                 // if all are valid then go to success screen
-                Navigator.pushNamed(context, CompleteProfileScreen.routeName);
+                // Navigator.pushNamed(context, CompleteProfileScreen.routeName);
+
+                // signup(context, email!, conform_password!);
+                  auth.createUserWithEmailAndPassword(
+          email: email!, password: conform_password!);
+      Navigator.pushNamed(context, CompleteProfileScreen.routeName);
               }
             },
           ),

@@ -1,3 +1,4 @@
+import 'package:dev_ops/screens/home/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:dev_ops/components/custom_surfix_icon.dart';
 import 'package:dev_ops/components/default_button.dart';
@@ -53,7 +54,9 @@ class _CompleteProfileFormState extends State<CompleteProfileForm> {
             text: "continue",
             press: () {
               if (_formKey.currentState!.validate()) {
-                Navigator.pushNamed(context, OtpScreen.routeName);
+                      Navigator.pushNamed(context, HomeScreen.routeName);
+
+                // Navigator.pushNamed(context, OtpScreen.routeName);
               }
             },
           ),
