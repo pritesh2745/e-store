@@ -1,3 +1,5 @@
+import 'package:dev_ops/screens/home/home_screen.dart';
+import 'package:dev_ops/screens/login_success/login_success_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:dev_ops/components/default_button.dart';
 import 'package:dev_ops/size_config.dart';
@@ -109,7 +111,10 @@ class _OtpFormState extends State<OtpForm> {
           SizedBox(height: SizeConfig.screenHeight * 0.15),
           DefaultButton(
             text: "Continue",
-            press: () {},
+            press: () {
+              //  Navigator.pushNamed(context, LoginSuccessScreen.routeName);
+                 Navigator.pushNamed(context, HomeScreen.routeName);
+            },
           )
         ],
       ),

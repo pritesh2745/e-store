@@ -15,28 +15,36 @@ class SpecialOffers extends StatelessWidget {
         Padding(
           padding:
               EdgeInsets.symmetric(horizontal: getProportionateScreenWidth(20)),
-          // child: SectionTitle(
-          //   title: "Special for you",
-          //   press: () {},
-          // ),
+          child: SectionTitle(
+            title: "Special for you",
+            press: () {
+
+              //to be added 
+            },
+          ),
         ),
         SizedBox(height: getProportionateScreenWidth(20)),
         SingleChildScrollView(
           scrollDirection: Axis.horizontal,
           child: Row(
             children: [
-              // SpecialOfferCard(
-              //   image: "assets/images/Image Banner 2.png",
-              //   category: "Smartphone",
-              //   numOfBrands: 18,
-              //   press: () {},
-              // ),
-              // SpecialOfferCard(
-              //   image: "assets/images/Image Banner 3.png",
-              //   category: "Fashion",
-              //   numOfBrands: 24,
-              //   press: () {},
-              // ),
+              SpecialOfferCard(
+                image: "assets/images/Image Banner 2.png",
+                category: "Smartphone",
+                numOfBrands: 18,
+                press: () {
+
+                  //to be added
+                },
+              ),
+              SpecialOfferCard(
+                image: "assets/images/Image Banner 3.png",
+                category: "Fashion",
+                numOfBrands: 24,
+                press: () {
+                  //to be added
+                },
+              ),
               SizedBox(width: getProportionateScreenWidth(20)),
             ],
           ),

@@ -68,9 +68,9 @@ class _SignUpFormState extends State<SignUpForm> {
               if (_formKey.currentState!.validate()) {
                 _formKey.currentState!.save();
                 // if all are valid then go to success screen
-                // Navigator.pushNamed(context, CompleteProfileScreen.routeName);
+                Navigator.pushNamed(context, CompleteProfileScreen.routeName);
 
-                // signup(context, email!, conform_password!);
+                signup(context, email!, conform_password!);
                   auth.createUserWithEmailAndPassword(
           email: email!, password: conform_password!);
       Navigator.pushNamed(context, CompleteProfileScreen.routeName);
