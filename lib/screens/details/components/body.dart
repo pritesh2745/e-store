@@ -24,7 +24,9 @@ class Body extends StatelessWidget {
             children: [
               ProductDescription(
                 product: product,
-                pressOnSeeMore: () {},
+                pressOnSeeMore: () {
+                  
+                },
               ),
               TopRoundedContainer(
                 color: Color(0xFFF6F7F9),
@@ -42,7 +44,10 @@ class Body extends StatelessWidget {
                         ),
                         child: DefaultButton(
                           text: "Add To Cart",
-                          press: () {},
+                          press: () {
+
+                            //how to add to cart
+                          },
                         ),
                       ),
                     ),

@@ -1,3 +1,4 @@
+import 'package:dev_ops/screens/home/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -26,10 +27,6 @@ class ProfileMenu extends StatelessWidget {
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
           backgroundColor: Color(0xFFF5F6F9),
         ),
-       onPressed: () {
-                    Navigator.popUntil(
-                        context, ModalRoute.withName('ProfileScreen'));
-                  },
         child: Row(
           children: [
             SvgPicture.asset(
@@ -42,6 +39,14 @@ class ProfileMenu extends StatelessWidget {
             Icon(Icons.arrow_forward_ios),
           ],
         ),
+        onPressed: ()=>
+           Navigator.pushNamed(context, HomeScreen.routeName),
+  // onPressed:() =>   Navigator.pushReplacement(
+  //     MaterialPageRoute(builder: (BuildContext context) => HomeScreen())),
+      //  onPressed: () {
+      //               Navigator.pushReplacement(
+      //                   context,('HomeScreen'), ModalRoute.withName('SplashScreen'));
+      //             },
       ),
       
     );

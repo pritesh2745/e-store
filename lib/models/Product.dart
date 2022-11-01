@@ -7,7 +7,7 @@ class Product {
   final List<Color> colors;
   final double rating, price;
   final bool isFavourite, isPopular;
-
+  // final bool isPopular;
   Product({
     required this.id,
     required this.images,
@@ -42,7 +42,7 @@ List<Product> demoProducts = [
     price: 64.99,
     description: description,
     rating: 4.8,
-    isFavourite: true,
+    isFavourite: false,
     isPopular: true,
   ),
   Product(
@@ -60,6 +60,7 @@ List<Product> demoProducts = [
     price: 50.5,
     description: description,
     rating: 4.1,
+    isFavourite: true,
     isPopular: true,
   ),
   Product(
@@ -96,6 +97,61 @@ List<Product> demoProducts = [
     description: description,
     rating: 4.1,
     isFavourite: true,
+    isPopular: true,
+  ),
+  Product(
+    id: 5,
+    images: [
+      "assets/images/wireless headset.png",
+    ],
+    colors: [
+      Color(0xFFF6625E),
+      Color(0xFF836DB8),
+      Color(0xFFDECB9C),
+      Colors.white,
+    ],
+    title: "Logitech Head",
+    price: 20.20,
+    description: description,
+    rating: 4.1,
+    isFavourite: true,
+    isPopular: true,
+  ),
+  Product(
+    id: 6,
+    images: [
+      "assets/images/wireless headset.png",
+    ],
+    colors: [
+      Color(0xFFF6625E),
+      Color(0xFF836DB8),
+      Color(0xFFDECB9C),
+      Colors.white,
+    ],
+    title: "Logitech Head",
+    price: 20.20,
+    description: description,
+    rating: 4.1,
+    isFavourite: true,
+    isPopular: true,
+  ),
+  Product(
+    id: 4,
+    images: [
+      "assets/images/wireless headset.png",
+    ],
+    colors: [
+      Color(0xFFF6625E),
+      Color(0xFF836DB8),
+      Color(0xFFDECB9C),
+      Colors.white,
+    ],
+    title: "Logitech Head",
+    price: 20.20,
+    description: description,
+    rating: 4.1,
+    isFavourite: true,
+    isPopular: true,
   ),
 ];
 

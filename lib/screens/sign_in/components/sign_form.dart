@@ -1,3 +1,5 @@
+import 'package:dev_ops/screens/complete_profile/complete_profile_screen.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:dev_ops/components/custom_surfix_icon.dart';
 import 'package:dev_ops/components/form_error.dart';
@@ -16,8 +18,9 @@ class SignForm extends StatefulWidget {
 
 class _SignFormState extends State<SignForm> {
   final _formKey = GlobalKey<FormState>();
-  String? email;
-  String? password;
+  final _auth = FirebaseAuth.instance;
+   late String email, password;
+ 
   bool? remember = false;
   final List<String?> errors = [];
 
@@ -35,6 +38,7 @@ class _SignFormState extends State<SignForm> {
       });
   }
 
+  String? errorMessage;
   @override
   Widget build(BuildContext context) {
     return Form(
@@ -72,12 +76,34 @@ class _SignFormState extends State<SignForm> {
           SizedBox(height: getProportionateScreenHeight(20)),
           DefaultButton(
             text: "Continue",
-            press: () {
+            press: () async {
               if (_formKey.currentState!.validate()) {
                 _formKey.currentState!.save();
+
                 // if all are valid then go to success screen
+                try {
+  UserCredential userCredential = await FirebaseAuth.instance.signInWithEmailAndPassword(
+    email:email,
+    password: password
+  );
+ Navigator.pushNamed(context, LoginSuccessScreen.routeName);
+} on FirebaseAuthException catch (e) {
+  if (e.code == 'user-not-found') {
+      Navigator.pushNamed(context, CompleteProfileScreen.routeName);
+    print('No user found for that email.');
+  } else if (e.code == 'wrong-password') {
+     Navigator.pushNamed(context, CompleteProfileScreen.routeName);
+    print('Wrong password provided for that user.');
+  }
+
+  
+}
+     
+                // signin(email, password);
+                // _auth.signInWithEmailAndPassword(
+                //     email: email, password: password);
                 KeyboardUtil.hideKeyboard(context);
-                Navigator.pushNamed(context, LoginSuccessScreen.routeName);
+              
               }
             },
           ),
@@ -86,11 +112,49 @@ class _SignFormState extends State<SignForm> {
     );
   }
 
+  // void signin(String? email, String? password) async {
+  //   if (_formKey.currentState!.validate()) {
+  //     try {
+  //       await _auth.signInWithEmailAndPassword(
+  //           email: email, password: password);
+  //       Navigator.pushNamed(context, LoginSuccessScreen.routeName);
+  //     } on FirebaseAuthException catch (error) {
+  //       switch (error.code) {
+  //         case "invalid-email":
+  //           errorMessage = "Your email address appears to be malformed.";
+
+  //           break;
+  //         case "wrong-password":
+  //           errorMessage = "Your password is wrong.";
+  //           break;
+  //         case "user-not-found":
+  //           errorMessage = "User with this email doesn't exist.";
+  //           break;
+  //         case "user-disabled":
+  //           errorMessage = "User with this email has been disabled.";
+  //           break;
+  //         case "too-many-requests":
+  //           errorMessage = "Too many requests";
+  //           break;
+  //         case "operation-not-allowed":
+  //           errorMessage = "Signing in with Email and Password is not enabled.";
+  //           break;
+  //         default:
+  //           errorMessage = "An undefined Error happened.";
+  //       }
+  //     }
+  //   }
+  // }
+
   TextFormField buildPasswordFormField() {
     return TextFormField(
       obscureText: true,
-      onSaved: (newValue) => password = newValue,
+      // onSaved: (newValue) => password = newValue,
       onChanged: (value) {
+        setState(() {
+          
+        password = value.trim();
+        });
         if (value.isNotEmpty) {
           removeError(error: kPassNullError);
         } else if (value.length >= 8) {
@@ -122,8 +186,12 @@ class _SignFormState extends State<SignForm> {
   TextFormField buildEmailFormField() {
     return TextFormField(
       keyboardType: TextInputType.emailAddress,
-      onSaved: (newValue) => email = newValue,
+      // onSaved: (newValue) => email = newValue,
       onChanged: (value) {
+        setState(() {
+          
+        email = value.trim();
+        });
         if (value.isNotEmpty) {
           removeError(error: kEmailNullError);
         } else if (emailValidatorRegExp.hasMatch(value)) {
